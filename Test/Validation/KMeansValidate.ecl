@@ -15,8 +15,8 @@
 
 IMPORT ML_Core;
 IMPORT ML_Core.Types;
-IMPORT Cluster;
-IMPORT Test;
+IMPORT $.^ as Test;
+IMPORT $.^.^ as KM;
 
 //Data Preperation
 //Load Iris Dataset
@@ -39,14 +39,14 @@ d02 := PROJECT(d01(id IN ids),TRANSFORM(Types.NumericField,
 max_iteratons := 30;
 tolerance := 0.0;
 //Train KMeans model with the samples d01 and the centroids d02
-Model := Cluster.KMeans(max_iteratons, tolerance).fit(d01, d02);
+Model := KM.KMeans(max_iteratons, tolerance).fit(d01, d02);
 //Below are the results:
 //Coordinates of cluster centers
-Centroids := Cluster.KMeans().Centers(Model);
+Centroids := KM.KMeans().Centers(Model);
 //Number of iterations run
-Total_Iterations := Cluster.KMeans().iterations(Model);
+Total_Iterations := KM.KMeans().iterations(Model);
 //Labels of each training sample
-Labels := Cluster.KMeans().Labels(Model);
+Labels := KM.KMeans().Labels(Model);
 
 //Validate the results against the results of sklearn.Cluster.KMeans
 ML_Core.ToField(Test.Datasets.DSIris.sklearn_rst, sklearn_rst);
