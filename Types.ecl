@@ -1,9 +1,12 @@
-IMPORT ML_Core.Types as Types;
+/*##############################################################################
+## HPCC SYSTEMS software Copyright (C) 2019 HPCC Systems.  All rights reserved.
+############################################################################## */
+IMPORT ML_Core.Types as CTypes;
 
 /**
   * Type definition module for KMeans.
   */
-EXPORT Cluster_Types := MODULE
+EXPORT Types := MODULE
   /**
     * Definition of the meaning of the indexes of the KMeans Model variables.
     * <p>Ind1 enumerates the first index, which
@@ -27,10 +30,10 @@ EXPORT Cluster_Types := MODULE
       * @value iterations = 4. The iteration runs of each wi.
       */
     EXPORT Ind1 := MODULE
-      EXPORT Types.t_index reserved := 1; // Reserved for future use
-      EXPORT Types.t_index centers := 2;
-      EXPORT Types.t_index samples := 3;
-      EXPORT Types.t_index iterations := 4;
+      EXPORT CTypes.t_index reserved := 1; // Reserved for future use
+      EXPORT CTypes.t_index centers := 2;
+      EXPORT CTypes.t_index samples := 3;
+      EXPORT CTypes.t_index iterations := 4;
     END;
     /**
       * Centers_Indexes enumerates the second and third indexes of each center which is the
@@ -55,17 +58,21 @@ EXPORT Cluster_Types := MODULE
       *
       * @field  wi      The model identifier.
       * @field  id      The sample identifier.
-      * @field  lable   The identifier of the closest center to the sample.
+      * @field  label   The identifier of the closest center to the sample.
       */
     EXPORT Labels := RECORD
-      Types.t_Work_Item wi;      // Model Identifier
-      Types.t_RecordID  id;      // Sample Identifier
-      Types.t_RecordID  label;   // Center Identifier
+      CTypes.t_Work_Item wi;      // Model Identifier
+      CTypes.t_RecordID  id;      // Sample Identifier
+      CTypes.t_RecordID  label;   // Center Identifier
     END;
-
+    /**
+      * The number of iterations for which each work item was trained.
+      * @field wi The work item id.
+      * @field iters The number of iterations.
+      */
     EXPORT n_iters := RECORD
-      Types.t_Work_Item wi;      // Model Identifier
-      Types.t_Count     iters;   // The total number of iterations for each wi
+      CTypes.t_Work_Item wi;      // Model Identifier
+      CTypes.t_Count     iters;   // The total number of iterations for each wi
     END;
-  END;//KMeans-Types
-END; //Cluster_Types
+  END;
+END; //Types

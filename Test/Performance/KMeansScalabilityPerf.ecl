@@ -8,8 +8,8 @@
   */
 IMPORT ML_Core;
 IMPORT ML_Core.Types;
-IMPORT Test;
-IMPORT Cluster;
+IMPORT $.^ as Test;
+IMPORT $.^.^ as KM;
 
 //Data Preperation
 //Load Iris Dataset
@@ -27,7 +27,7 @@ d02 := d01(id IN centroidsID);
 max_iteratons := 30;
 tolerance := 0.0;
 //Fit KMeans model with the samples d01 and the centroids d02
-Model := Cluster.KMeans(max_iteratons, tolerance).fit(d01, d02);
+Model := KM.KMeans(max_iteratons, tolerance).fit(d01, d02);
 //Coordinates of cluster centers
-Centroids := Cluster.KMeans().Centers(Model);
+Centroids := KM.KMeans().Centers(Model);
 OUTPUT(Centroids);

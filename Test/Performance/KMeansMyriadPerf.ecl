@@ -9,9 +9,9 @@
 
 IMPORT ML_Core;
 IMPORT ML_Core.Types;
-IMPORT Cluster;
 IMPORT PBblas;
-IMPORT Test;
+IMPORT $.^ as Test;
+IMPORT $.^.^ as KM;
 
 //Data Preperation
 //Load Iris Dataset
@@ -26,10 +26,10 @@ ML_Core.AppendSeqId(ds, id, base_ids);
 ML_Core.ToField(base_ids, base_idsWi);
 base_d01 := base_idsWi(number < 5);
 base_d02 := base_d01(id IN centroidsID);
-base_Model := Cluster.KMeans(max_iteratons, tolerance).fit(base_d01, base_d02);
-base_Centroids := Cluster.KMeans().Centers(base_Model);
-Base_iters := Cluster.KMeans().iterations(base_Model);
-base_labels := Cluster.KMeans().Labels(base_Model);
+base_Model := KM.KMeans(max_iteratons, tolerance).fit(base_d01, base_d02);
+base_Centroids := KM.KMeans().Centers(base_Model);
+Base_iters := KM.KMeans().iterations(base_Model);
+base_labels := KM.KMeans().Labels(base_Model);
 
 //Create myriad dataset: multi-wi [1..5]
 myriad(INTEGER w) := PROJECT(base_d01, TRANSFORM(Types.NumericField,
@@ -48,13 +48,13 @@ d01  := ds1 + ds2 + ds3 + ds4 + ds5;
 d02 := d01(id IN centroidsID);
 
 //Fit KMeans model with the samples d01 and the centroids d02
-Myriad_Model :=Cluster.KMeans(max_iteratons, tolerance).fit(d01, d02);
+Myriad_Model :=KM.KMeans(max_iteratons, tolerance).fit(d01, d02);
 //Coordinates of cluster centers
-Centroids := Cluster.KMeans().Centers(Myriad_Model);
+Centroids := KM.KMeans().Centers(Myriad_Model);
 //Number of iterations run
-iters := Cluster.KMeans().iterations(Myriad_Model);
+iters := KM.KMeans().iterations(Myriad_Model);
 //Labels of each point
-labels := Cluster.KMeans().Labels(Myriad_Model);
+labels := KM.KMeans().Labels(Myriad_Model);
 
 //Validate the results of the myriad-interface against baseline
 //Validation 1: Coordinates of each cluster center
