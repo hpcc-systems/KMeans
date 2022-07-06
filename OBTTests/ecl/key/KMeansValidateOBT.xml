@@ -1,0 +1,9 @@
+<Dataset name='IsSameCoordinateTest'>
+ <Row><IsSameCoordinateTest>Pass</IsSameCoordinateTest></Row>
+</Dataset>
+<Dataset name='IsSameNumberRunTest'>
+ <Row><IsSameNumberRunTest>Pass</IsSameNumberRunTest></Row>
+</Dataset>
+<Dataset name='IsSameLabelTest'>
+ <Row><IsSameLabelTest>Pass</IsSameLabelTest></Row>
+</Dataset>
